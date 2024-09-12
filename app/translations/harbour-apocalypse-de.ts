@@ -155,6 +155,14 @@
         <source>sent</source>
         <translation>Gesendet</translation>
     </message>
+    <message id="id-onset">
+        <source>onset</source>
+        <translation>Start</translation>
+    </message>
+    <message id="id-expires">
+        <source>expires</source>
+        <translation>Bis</translation>
+    </message>
     <message id="id-type">
         <source>Type</source>
         <translation>Typ</translation>
