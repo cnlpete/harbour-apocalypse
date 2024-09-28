@@ -122,6 +122,19 @@ Page {
             }
 
             DetailItem {
+                //% "onset"
+                label: qsTrId("id-onset")
+                value: new Date(msg.onset).toLocaleString()
+                visible: msg.onset
+            }
+            DetailItem {
+                //% "expires"
+                label: qsTrId("id-expires")
+                value: new Date(msg.expires).toLocaleString()
+                visible: msg.expires
+            }
+
+            DetailItem {
                 //% "Type"
                 label: qsTrId("id-type")
                 value: {

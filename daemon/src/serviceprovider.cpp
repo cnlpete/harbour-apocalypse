@@ -349,6 +349,15 @@ void ServiceProvider::parseMessages(const QString &url, const QJsonArray &msgs)
         msg.insert("identifier", obj.value("identifier"));
         msg.insert("sender", obj.value("sender"));
         msg.insert("sent", obj.value("sent"));
+        if (obj.contains("effective")) {
+            msg.insert("effective", obj.value("effective"));
+        }
+        if (obj.contains("onset")) {
+            msg.insert("onset", obj.value("onset"));
+        }
+        if (obj.contains("expires")) {
+            msg.insert("expires", obj.value("expires"));
+        }
         msg.insert("status", obj.value("status"));
         msg.insert("msgType", obj.value("msgType"));
         msg.insert("scope", obj.value("scope"));
