@@ -547,7 +547,7 @@ void ServiceProvider::sendNotification(const QJsonObject &msg)
     notification.setAppName("Apocalypse");
     notification.setIcon(QStringLiteral("image://theme/icon-lock-warning"));
     notification.setCategory(QStringLiteral("x-apocalypse.warnings"));
-    notification.setSummary(msg.value("msgType").toString());
+    notification.setSummary(msg.value("locationName").toString() + " - " + msg.value("msgType").toString());
     notification.setBody(msg.value("headline").toString());
     notification.setRemoteAction(Notification::remoteAction(
                                     QStringLiteral("default"),
