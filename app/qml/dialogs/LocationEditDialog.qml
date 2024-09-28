@@ -16,6 +16,25 @@ Dialog {
     PositionSource {
         id: positionSource
         active: true
+        onPositionChanged: {
+            map.updateSourcePoint("gps", position.coordinate.latitude, position.coordinate.longitude, qsTrId("id-use-current-position"))
+
+            if (position.latitudeValid) {
+                map.addLayer("gps-uncertainty", {"type": "circle", "source": "gps"}, "initial-point")
+                map.setPaintProperty("gps-uncertainty", "circle-radius", position.horizontalAccuracy && position.horizontalAccuracy < 100 ? position.horizontalAccuracy : 100)
+                map.setPaintProperty("gps-uncertainty", "circle-color", "#87cefa")
+                map.setPaintProperty("gps-uncertainty", "circle-opacity", 0.25)
+
+                map.addLayer("gps-case", {"type": "circle", "source": "gps"})
+                map.setPaintProperty("gps-case", "circle-radius", 10)
+                map.setPaintProperty("gps-case", "circle-color", "white")
+            }
+            else {
+                map.addLayer("gps-case", {"type": "circle", "source": "gps"})
+                map.setPaintProperty("gps-case", "circle-radius", 10)
+                map.setPaintProperty("gps-case", "circle-color", "grey")
+            }
+        }
     }
 
     Column {
@@ -159,11 +178,16 @@ Dialog {
                 activeDoubleClickedGeo: true
 
                 onClickedGeo: {
-                    if (Math.abs(geocoordinate.latitude - latitude) < 5 * degLatPerPixel &&
-                            Math.abs(geocoordinate.longitude - longitude) < 5 * degLonPerPixel) {
+                    if (Math.abs(geocoordinate.latitude - latitude) < 10 * degLatPerPixel &&
+                            Math.abs(geocoordinate.longitude - longitude) < 10 * degLonPerPixel) {
                         latitudeField.text = latitude
                         longitudeField.text = longitude
                     }
+                    else if (Math.abs(geocoordinate.latitude - positionSource.position.coordinate.latitude) < 10 * degLatPerPixel &&
+                                Math.abs(geocoordinate.longitude - positionSource.position.coordinate.longitude) < 10 * degLonPerPixel) {
+                            latitudeField.text = positionSource.position.coordinate.latitude
+                            longitudeField.text = positionSource.position.coordinate.longitude
+                        }
                     else {
                         latitudeField.text = geocoordinate.latitude
                         longitudeField.text = geocoordinate.longitude
