@@ -98,8 +98,7 @@ Dialog {
                 longitudeField.text = positionSource.position.coordinate.longitude
 
                 map.fitView([
-                                QtPositioning.coordinate(latitude, longitude),
-                                QtPositioning.coordinate(position.coordinate.latitude, position.coordinate.longitude)
+                                QtPositioning.coordinate(positionSource.position.coordinate.latitude, positionSource.position.coordinate.longitude)
                             ])
             }
         }
