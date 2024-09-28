@@ -20,17 +20,17 @@ Dialog {
             map.updateSourcePoint("gps", position.coordinate.latitude, position.coordinate.longitude, qsTrId("id-use-current-position"))
 
             if (position.latitudeValid) {
-                map.addLayer("gps-uncertainty", {"type": "circle", "source": "gps"}, "initial-point")
+                map.addLayer("gps-uncertainty", {"type": "circle", "source": "gps"}, "gps-case")
                 map.setPaintProperty("gps-uncertainty", "circle-radius", position.horizontalAccuracy && position.horizontalAccuracy < 100 ? position.horizontalAccuracy : 100)
                 map.setPaintProperty("gps-uncertainty", "circle-color", "#87cefa")
                 map.setPaintProperty("gps-uncertainty", "circle-opacity", 0.25)
 
-                map.addLayer("gps-case", {"type": "circle", "source": "gps"})
+                map.addLayer("gps-case", {"type": "circle", "source": "gps"}, "initial-point")
                 map.setPaintProperty("gps-case", "circle-radius", 10)
                 map.setPaintProperty("gps-case", "circle-color", "white")
             }
             else {
-                map.addLayer("gps-case", {"type": "circle", "source": "gps"})
+                map.addLayer("gps-case", {"type": "circle", "source": "gps"}, "initial-point")
                 map.setPaintProperty("gps-case", "circle-radius", 10)
                 map.setPaintProperty("gps-case", "circle-color", "grey")
             }
